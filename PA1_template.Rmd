@@ -10,6 +10,7 @@ By Ervachon - April 2015
 Load the data (i.e. read.csv())  
 
 ```{r,echo = FALSE}
+options(warn=-1)
 ThePath <- "D:/_MOOC_/git/Reproducible_Research/"
 ```
 NB: the variable **ThePath** is the complete path where is the activity file.
@@ -17,7 +18,7 @@ NB: the variable **ThePath** is the complete path where is the activity file.
 ActivityMonotoringData <- read.csv(paste(ThePath ,"activity.csv",sep =""))
 ```
 
-Process/transform the data (if necessary) into a format suitable for your analysis
+Process/transform the data (if necessary) into a format suitable for your analysis  
 Here i omit the NA value.
 
 ```{r}
@@ -26,17 +27,19 @@ ActivityMonotoringDataWithoutNA <- na.omit(ActivityMonotoringData)
 
 ###2 - What is mean total number of steps taken per day?
 
-Make a histogram of the total number of steps taken each day.
-NB: don't forget to load the "plyr"" library.
+Make a histogram of the total number of steps taken each day.  
+NB: don't forget to load the "plyr" library.
 
 ```{r}
 library(plyr)
 NumberOfStepsByDay <- ddply(ActivityMonotoringDataWithoutNA, 
                             .(ActivityMonotoringDataWithoutNA$date), 
                             summarise, sum = sum(steps, na.rm = TRUE))
-```
-```{r, echo=FALSE}
-hist(NumberOfStepsByDay$sum, col = "blue")
+hist(NumberOfStepsByDay$sum, 
+     col = "blue", 
+     main ="Number of steps by days",
+     xlab ="Interval of the day",  
+     ylab ="Number of steps")
 ```
 
 Calculate and report the mean and median total number of steps taken per day
@@ -56,7 +59,14 @@ AverageStepsByInt <- ddply(ActivityMonotoringDataWithoutNA, .(interval),
                             summarise, mean = mean(steps, na.rm = TRUE))
 par(bg='white', fg='white', col='black', col.axis='magenta',
     col.lab='black', col.main='blue', col.sub='black') 
-plot ( AverageStepsByInt$interval, AverageStepsByInt$mean, type = "l", col = "red", bg.col = "blue")
+plot ( AverageStepsByInt$interval, 
+       AverageStepsByInt$mean, 
+       type = "l", 
+       col = "red", 
+       bg.col = "blue",
+       main = "Daily activity",
+       xlab ="Interval of the day",  
+       ylab ="Number of steps")
 ```
 
 Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?
@@ -88,7 +98,11 @@ NumberOfStepsByDay2 <- ddply(ActivityMonotoringData2,
                              .(ActivityMonotoringData2$date), 
                              summarise, sum = sum(steps, na.rm = TRUE))
 
-hist(NumberOfStepsByDay2$sum, col = "blue")
+hist(NumberOfStepsByDay2$sum,
+     col = "blue", 
+     main ="Number of steps by days",
+     xlab ="Interval of the day",  
+     ylab ="Number of steps")
 ```
 ```{r}
 mean(NumberOfStepsByDay2$sum)
