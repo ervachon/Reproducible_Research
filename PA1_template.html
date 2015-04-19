@@ -110,7 +110,7 @@ plot ( AverageStepsByInt$interval,
 <pre class="r"><code>sum(is.na(ActivityMonotoringData$steps))</code></pre>
 <pre><code>## [1] 2304</code></pre>
 <p>Devise a strategy for filling in all of the missing values in the dataset. The strategy does not need to be sophisticated, create a new dataset that is equal to the original dataset but with the missing data filled in.</p>
-<p>Here I choose to replace NA values with the mean and make a new dataset.</p>
+<p>Here I choose to replace NA values with the <strong>mean</strong> and make a new dataset.</p>
 <pre class="r"><code>ActivityMonotoringData2 &lt;- ActivityMonotoringData
 ActivityMonotoringData2$steps[is.na(ActivityMonotoringData$steps)] &lt;- 
    AverageStepsByInt[AverageStepsByInt$interval == 
@@ -131,15 +131,15 @@ hist(NumberOfStepsByDay2$sum,
 <pre class="r"><code>median(NumberOfStepsByDay2$sum)</code></pre>
 <pre><code>## [1] 10439</code></pre>
 <p>Do these values differ from the estimates from the first part of the assignment? What is the impact of imputing missing data on the estimates of the total daily number of steps?</p>
-<p>The difference is that before the mean and the median were mostly identical (10766)<br /> And now the difference was 9530 // 10439<br /> we can notice that the median before and after is quit identical : 10766 // 10439<br /> Instead of the mean : 10766 // 9530 so the median is more</p>
+<p>The difference is that before the mean and the median were mostly identical (10766)<br /> And now the difference was 9530 // 10439<br /> we can notice that the median before and after is quit identical : 10766 // 10439</p>
 </div>
 <div id="are-there-differences-in-activity-patterns-between-weekdays-and-weekends" class="section level3">
 <h3>5 - Are there differences in activity patterns between weekdays and weekends?</h3>
 <p>Create a new factor variable in the dataset with two levels – “weekday” and “weekend” indicating whether a given date is a weekday or weekend day.</p>
-<p>i preferte use as.POSIXlt (and as.Date) Instead of weekdays because it return a integer 0 to 6 (sunday to saturday), easier to manipulate.</p>
-<p>I create the new column</p>
+<p>i preferte use <strong>as.POSIXlt</strong> (and as.Date) Instead of weekdays because it return a integer 0 to 6 (sunday to saturday), easier to manipulate.</p>
+<p>I create the new column <strong>typeDay</strong></p>
 <pre class="r"><code>ActivityMonotoringData2$typeDay &lt;- &quot;NA&quot;</code></pre>
-<p>And i update the value :<br />- 0,6 : it’s sunday and saturday -&gt; weekend<br />- 1 to 5 : monday to friday &gt; weekday</p>
+<p>And i update the value :<br />- 0,6 : it’s sunday and saturday -&gt; <strong>weekend</strong><br />- 1 to 5 : monday to friday -&gt; <strong>weekday</strong></p>
 <pre class="r"><code>ActivityMonotoringData2$typeDay[
    which(as.POSIXlt(as.Date(ActivityMonotoringData2$date))$wday %in% c(0,6)) 
    ] &lt;- &quot;weekend&quot;

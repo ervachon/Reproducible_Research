@@ -83,7 +83,7 @@ sum(is.na(ActivityMonotoringData$steps))
 
 Devise a strategy for filling in all of the missing values in the dataset. The strategy does not need to be sophisticated, create a new dataset that is equal to the original dataset but with the missing data filled in.
    
-   Here I choose to replace NA values with the mean and make a new dataset.
+   Here I choose to replace NA values with the **mean** and make a new dataset.
 ```{r}
 ActivityMonotoringData2 <- ActivityMonotoringData
 ActivityMonotoringData2$steps[is.na(ActivityMonotoringData$steps)] <- 
@@ -116,23 +116,21 @@ Do these values differ from the estimates from the first part of the assignment?
    The difference is that before the mean and the median were mostly identical (10766)  
    And now the difference was 9530 // 10439  
    we can notice that the median before and after is quit identical : 10766 // 10439  
-   Instead of the mean : 10766 // 9530 so the median is more 
-   
-   
+      
 
 ###5 - Are there differences in activity patterns between weekdays and weekends?
 
 Create a new factor variable in the dataset with two levels -- "weekday" and "weekend" indicating whether a given date is a weekday or weekend day.
 
-i preferte use as.POSIXlt (and as.Date) Instead of weekdays because it return a integer 0 to 6 (sunday to saturday), easier to manipulate.
+i preferte use **as.POSIXlt** (and as.Date) Instead of weekdays because it return a integer 0 to 6 (sunday to saturday), easier to manipulate.
 
-I create the new column
+I create the new column **typeDay**  
 ```{r}
 ActivityMonotoringData2$typeDay <- "NA"
 ```
 And i update the value :  
-- 0,6 : it's sunday and saturday -> weekend  
-- 1 to 5 : monday to friday > weekday  
+- 0,6 : it's sunday and saturday -> **weekend**  
+- 1 to 5 : monday to friday -> **weekday**  
 
 ```{r}
 ActivityMonotoringData2$typeDay[
