@@ -83,7 +83,7 @@ sum(is.na(ActivityMonotoringData$steps))
 
 Devise a strategy for filling in all of the missing values in the dataset. The strategy does not need to be sophisticated, create a new dataset that is equal to the original dataset but with the missing data filled in.
    
-   Here I choose to replace NA values with the mean and make a new matrice.
+   Here I choose to replace NA values with the mean and make a new dataset.
 ```{r}
 ActivityMonotoringData2 <- ActivityMonotoringData
 ActivityMonotoringData2$steps[is.na(ActivityMonotoringData$steps)] <- 
